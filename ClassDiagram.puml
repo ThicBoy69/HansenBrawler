@@ -1,5 +1,6 @@
 @startuml
 
+
 class GameController{
     + Player PlayerOne
     + Player PlayerTwo
@@ -7,19 +8,23 @@ class GameController{
     + Start()
 }
 
-class Player <<MonoBehaviour>>{
+abstract class Player <<MonoBehaviour>>{
 
 }
 
-class Hand <<MonoBehaviour>>{
+abstract class BodyPart <<MonoBehaviour>>{
+    + Player Owner
+}
+
+class Hand {
 
 }
 
-class Foot <<MonoBehaviour>>{
+class Foot {
 
 }
 
-class Body <<MonoBehaviour>>{
+class Body {
 
 }
 
@@ -37,10 +42,15 @@ interface IPlayerController
 }
 
 GameController *-- Player
-Player -up-|> IPlayerController
-Player -right- Hand
-Player -left- Foot
-Player -down- Body
+
+Body -up-|> BodyPart
+Hand -up-|> BodyPart
+Foot -up-|> BodyPart
+
+Player -- Hand
+Player -- Foot
+Player -- Body
+
 
 
 @enduml
