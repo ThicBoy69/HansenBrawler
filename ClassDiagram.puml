@@ -1,0 +1,46 @@
+@startuml
+
+class GameController{
+    + Player PlayerOne
+    + Player PlayerTwo
+    + Awake()
+    + Start()
+}
+
+class Player <<MonoBehaviour>>{
+
+}
+
+class Hand <<MonoBehaviour>>{
+
+}
+
+class Foot <<MonoBehaviour>>{
+
+}
+
+class Body <<MonoBehaviour>>{
+
+}
+
+interface IPlayerController
+{
+    + string PlayerName { get; }
+    + double Dmg { get; }
+    + double Hp { get; }
+    + double MaxHp { get; } //evt for regen
+    + double Speed { get; }
+    + void MoveLeft();
+    + void MoveRight();
+    + void Attack();
+    + void Block();
+}
+
+GameController *-- Player
+Player -up-|> IPlayerController
+Player -right- Hand
+Player -left- Foot
+Player -down- Body
+
+
+@enduml
